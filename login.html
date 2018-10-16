@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login - Library System</title>
+</head>
+
+<body>
+    <div id="app">
+        <v-app id="inspire">
+            <v-content class="primary">
+                <v-container fluid fill-height>
+                    <v-layout align-center justify-center>
+                        <v-flex xs12 sm8 md4>
+                            <v-container style="max-width: 500px;">
+                                <v-layout column justify-center align-center>
+                                    <p class=" font-weight-thin display-3 white--text text-xs-center">Library System</p>
+                                </v-layout>
+
+                                <!--Login-->
+                                <v-slide-x-transition leave-absolute hide-on-leave>
+                                    <v-card class="elevation-12" v-if="!resetPassword">
+                                        <v-container class="px-5">
+                                            <p class="headline text-xs-center primary--text">Login</p>
+                                            <v-form @submit.prevent="login" ref="loginForm" v-model="valid" lazy-validation>
+                                                <v-text-field prepend-icon="person" name="login" label="User ID" type="text" v-model="loginInfo.UserId" required :rules="userIdRules"></v-text-field>
+                                                <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password" v-model="loginInfo.Password" autocomplete="current-password" required :rules="passwordRules"></v-text-field>
+                                            </v-form>
+                                            <v-flex>
+                                                <v-expansion-panel v-model="loginFailed" class="elevation-0">
+                                                    <v-expansion-panel-content>
+                                                        <v-card flat color="red lighten-2" class="white--text">
+                                                            <v-card-text>
+                                                                Login Failed
+                                                            </v-card-text>
+                                                        </v-card>
+                                                    </v-expansion-panel-content>
+                                                </v-expansion-panel>
+                                            </v-flex>
+                                            <v-layout class="align-center justify-center mt-3">
+                                                <v-btn depressed color="primary" type="submit" @click="snack">Login</v-btn>
+                                            </v-layout>
+                                        </v-container>
+                                    </v-card>
+                                </v-slide-x-transition>
+
+                                <v-slide-x-transition leave-absolute hide-on-leave>
+                                    <a @click="resetPassword=true" v-if="!resetPassword">
+                                        <p class="mt-5 font-weight-medium text-xs-center white--text">Forget Password?</p>
+                                    </a>
+                                </v-slide-x-transition>
+
+                                <!--Reset PW-->
+                                <v-slide-x-transition leave-absolute hide-on-leave>
+                                    <v-card class="elevation-12" v-if="resetPassword">
+                                        <v-container class="px-5" leave-absolute hide-on-leave>
+                                            <p class="headline text-xs-center primary--text">Reset Password</p>
+                                            <v-form @submit.prevent="login" ref="resetForm" v-model="valid" lazy-validation>
+                                                <v-text-field prepend-icon="email" name="login" label="Email" type="text" v-model="loginInfo.UserId" required :rules="emailRules"></v-text-field>
+                                            </v-form>
+                                            <v-layout class="align-center justify-center mt-3">
+                                                <v-btn depressed color="primary" type="submit" @click="snack">Request Password Reset</v-btn>
+                                            </v-layout>
+                                        </v-container>
+                                    </v-card>
+
+                                </v-slide-x-transition>
+
+                                <v-slide-x-transition leave-absolute hide-on-leave>
+                                    <a @click="resetPassword=false" v-if="resetPassword">
+                                        <p class="mt-5 font-weight-medium text-xs-center white--text">Back to Login</p>
+                                    </a>
+                                </v-slide-x-transition>
+
+                            </v-container>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+            </v-content>
+            <!-- Login page end -->
+        </v-app>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: () => ({
+            resetPassword: false,
+            loginFailed: -1,
+            valid: true,
+            loginInfo: { //Object reserve to submit login request
+                UserId: '',
+                Password: ''
+            },
+            emailRules: [
+                v => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'Invalid Email format'
+            ],
+            passwordRules: [
+                v => !!v || 'Password is required'
+            ],
+            userIdRules: [v => !!v || "User ID is required"],
+            roles: ['Staff', 'Student', 'Alumni']
+        }),
+        methods: {
+            snack() {
+                if (this.$refs.loginForm.validate()) {
+                    this.loginFailed = 0;
+                }
+            }
+        }
+    })
+</script>
+
+</html>
