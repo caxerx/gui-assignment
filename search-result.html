@@ -199,7 +199,7 @@
                     }
                 })
                 let keyword = this.keyword;
-                this.keyword = "";
+                this.keyword = keyword == "" ? " " : "";
                 setTimeout(() => {
                     this.keyword = keyword;
                 }, 1)
