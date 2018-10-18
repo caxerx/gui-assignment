@@ -6,7 +6,7 @@
     "publisher": "American Association for the Advancement of Science",
     "category": "magazine",
     "description": "Science, also widely referred to as Science Magazine, is the peer-reviewed academic journal of the American Association for the Advancement of Science (AAAS) and one of the world's top academic journals.",
-    "available": true
+    "available": false
 }, {
     "id": "M12345679",
     "cover": "./images/magazines/2.jpg",
@@ -51,7 +51,7 @@
     "publisher": "Sue Carter",
     "category": "magazine",
     "description": "Quill & Quire, a Canadian magazine about the book and publishing industry, was launched in 1935 and has an average circulation of 5,000 copies per issue, with a publisher-claimed readership of 25,000.",
-    "available": true
+    "available": false
 }, {
     "id": "M12345684",
     "cover": "./images/magazines/7.jpg",

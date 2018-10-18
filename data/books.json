@@ -60,7 +60,7 @@
     "publisher": "AmazonCrossing",
     "category": "book",
     "description": "A chilling true crime story of poisonous family secrets, love gone wrong, and a cold case that refused to stay buried…",
-    "available": true
+    "available": false
 }, {
     "id": "B12345685",
     "cover": "./images/books/9.jpg",

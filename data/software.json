@@ -51,7 +51,7 @@
     "publisher": "Adobe",
     "category": "software",
     "description": "Adobe Illustrator is a vector graphics editor developed and marketed by Adobe Systems.",
-    "available": true
+    "available": false
 }, {
     "id": "S12345684",
     "cover": "./images/softwares/7.png",
@@ -69,32 +69,5 @@
     "publisher": "Adobe",
     "category": "software",
     "description": "Adobe Premiere Pro is a timeline-based video editing app developed by Adobe Systems and published as part of the Adobe Creative Cloud licensing program.",
-    "available": true
-}, {
-    "id": "S123456__",
-    "cover": "./images/softwares/_.jpg",
-    "title": "",
-    "author": "",
-    "publisher": "",
-    "category": "software",
-    "description": "",
-    "available": true
-}, {
-    "id": "S123456__",
-    "cover": "./images/softwares/_.jpg",
-    "title": "",
-    "author": "",
-    "publisher": "",
-    "category": "software",
-    "description": "",
-    "available": true
-}, {
-    "id": "S123456__",
-    "cover": "./images/softwares/_.jpg",
-    "title": "",
-    "author": "",
-    "publisher": "",
-    "category": "software",
-    "description": "",
     "available": true
 }]

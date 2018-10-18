@@ -171,7 +171,7 @@
             let urlParams = new URLSearchParams(window.location.search);
             this.keyword = urlParams.get('keyword');
 
-            Promise.all(bk, sf, mz).then(() => {
+            Promise.all([bk, sf, mz]).then(() => {
                 this.allClicked()
             })
         },
@@ -198,9 +198,15 @@
                         this.filteredBooks.push(b)
                     }
                 })
+            },
+            page() {
+                window.scrollTo(0, 0);
             }
         },
         computed: {
+            page() {
+                return this.pagination.page;
+            },
             allText() {
                 if (this.filter.length >= this.categories.length) {
                     return "Unselect All"
