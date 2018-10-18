@@ -28,31 +28,21 @@
 
                                 <v-layout row>
                                     <v-flex xs12>
-                                        <v-text-field name="name" prepend-inner-icon="search" outline dark clearable color="white" single-line></v-text-field>
+                                        <form @submit.prevent="search">
+                                            <v-text-field name="name" prepend-inner-icon="search" outline dark clearable color="white" single-line v-model="keyword"></v-text-field>
+                                        </form>
                                     </v-flex>
                                 </v-layout>
                                 <v-layout column align-center justify-center>
                                     <v-flex>
-                                        <v-btn flat dark outline>Search</v-btn>
+                                        <v-btn flat dark outline @click="search">Search</v-btn>
                                     </v-flex>
                                 </v-layout>
-                                <!--
-                                <v-card class="elevation-12">
-                                    <v-container class="px-5">
-                                        
-                                        <v-layout class=" align-center justify-center mt-3 ">
-                                            <v-btn depressed color="primary " type="submit ">Search</v-btn>
-                                        </v-layout>
-                                    </v-container>
-                                </v-card>
-                            -->
-
                             </v-container>
                         </v-flex>
                     </v-layout>
                 </v-container>
             </v-content>
-            <!-- Login page end -->
         </v-app>
     </div>
 </body>
@@ -63,9 +53,13 @@
     new Vue({
         el: '#app',
         data: () => ({
-
+            keyword: ""
         }),
-        methods: {}
+        methods: {
+            search() {
+                window.location.href = `./search-result.html?keyword=${this.keyword}`
+            }
+        }
     })
 </script>
 
