@@ -25,4 +25,49 @@
     "category": "book",
     "description": "The Monster Manual presents a horde of classic Dungeons & Dragons creatures, including dragons, giants, mind flayers, and beholders–a monstrous feast for Dungeon Masters ready to challenge their players and populate their adventures.",
     "available": true
+}, {
+    "id": "B12345681",
+    "cover": "./images/books/5.jpg",
+    "title": "Gmorning, Gnight!: Little Pep Talks for Me & You",
+    "author": "Lin-Manuel Miranda",
+    "publisher": "Random House",
+    "category": "book",
+    "description": "From the creator and star of Hamilton, with beautiful illustrations by Jonny Sun, comes a book of affirmations to inspire readers at the beginning and end of each day.",
+    "available": true
+}, {
+    "id": "B12345682",
+    "cover": "./images/books/6.jpg",
+    "title": "The Reckoning: A Novel",
+    "author": "John Grisham",
+    "publisher": "Doubleday",
+    "category": "book",
+    "description": "John Grisham’s The Reckoning is the master storyteller’s most powerful, surprising, and accomplished novel yet",
+    "available": true
+}, {
+    "id": "B12345683",
+    "cover": "./images/books/7.jpg",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "publisher": "Pottermore Publishing",
+    "category": "book",
+    "description": "Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin!",
+    "available": true
+}, {
+    "id": "B12345684",
+    "cover": "./images/books/8.jpg",
+    "title": "The Dark Heart: A True Story of Greed, Murder, and an Unlikely Investigator",
+    "author": "Joakim Palmkvist",
+    "publisher": "AmazonCrossing",
+    "category": "book",
+    "description": "A chilling true crime story of poisonous family secrets, love gone wrong, and a cold case that refused to stay buried…",
+    "available": true
+}, {
+    "id": "B12345685",
+    "cover": "./images/books/9.jpg",
+    "title": "The Meltdown (Diary of a Wimpy Kid Book 13) ",
+    "author": "Jeff Kinney",
+    "publisher": "Amulet Books",
+    "category": "book",
+    "description": "When snow shuts down Greg Heffley’s middle school, his neighborhood transforms into a wintry battlefield. Rival groups fight over territory, build massive snow forts, and stage epic snowball fights. And in the crosshairs are Greg and his trusty best friend, Rowley Jefferson. It’ s a fight for survival as Greg and Rowley navigate alliances, betrayals, and warring gangs in a neighborhood meltdown.When the snow clears, will Greg and Rowley emerge as heroes ? Or will they even survive to see another day ?",
+    "available": true
 }]
