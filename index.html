@@ -1,3 +1,12 @@
+<script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.js"></script>
+
 <script>
+    if (!localStorage.getItem("init")) {
+        axios.get("./data/users.json").then(resp => {
+            localStorage.setItem("users", JSON.stringify(resp.data))
+        })
+
+        localStorage.setItem("init", true)
+    }
     window.location.href = './login.html'
 </script>

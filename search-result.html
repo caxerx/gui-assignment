@@ -22,24 +22,37 @@
                         <v-text-field prepend-inner-icon="search" hide-details single-line solo v-model="keyword"></v-text-field>
                     </v-flex>
                     <v-flex xs12 mt-3 px-3>
-                        <span class="body-2">Filter by category</span>
+                        <v-layout>
+                            <span class="body-2">Filter by category</span>
+                            <v-spacer></v-spacer>
+                            <a small flat @click="allClicked">{{allText}}</a>
+                        </v-layout>
                         <div v-for="c in categories">
-                            <v-checkbox :label="c" single-line hide-details></v-checkbox>
+                            <v-checkbox :label="c" hide-details v-model="filter" :value="c.toLowerCase()"></v-checkbox>
                         </div>
                     </v-flex>
                 </v-layout>
             </v-navigation-drawer>
             <v-content>
 
-                <v-toolbar flat style="position:fixed; z-index:10">
-                    {{pageMin}}-{{pageMax}} of over {{totalResult}} results for "{{keyword}}" {{pagination}}
-                </v-toolbar>
+                <div style="position:fixed; z-index:10; width:100%">
+                    <v-toolbar flat>
+                        <template v-if="pagination.totalItems > 0">
+                            {{pageMin}} - {{pageMax}} of total {{pagination.totalItems}}
+                        </template>
+                        <template v-else>
+                            No
+                        </template> results
+                        <template v-if="keyword && keyword != ''">
+                            for "{{keyword}}"
+                        </template>
+                    </v-toolbar>
+                    <v-divider></v-divider>
+                </div>
 
-                <v-divider></v-divider>
+                <v-container mt-5>
 
-                <v-container>
-
-                    <v-data-iterator column :items="books" :pagination.sync="pagination" content-tag="div">
+                    <v-data-iterator column :items="filteredBooks" :pagination.sync="pagination" content-tag="div" :search="keyword">
                         <div slot="item" slot-scope="props">
                             <v-card class="mt-4">
                                 <v-container>
@@ -50,12 +63,10 @@
                                             </v-layout>
                                             <v-layout column pt-3 align-center>
                                                 <v-flex>
-                                                    <v-chip label small color="success" text-color="white" disabled
-                                                        v-if="props.item.available === true">
+                                                    <v-chip label small color="success" text-color="white" disabled v-if="props.item.available === true">
                                                         Available
                                                     </v-chip>
-                                                    <v-chip label small color="error" text-color="white" disabled
-                                                        v-else>
+                                                    <v-chip label small color="error" text-color="white" disabled v-else>
                                                         Not Available
                                                     </v-chip>
                                                 </v-flex>
@@ -64,7 +75,7 @@
                                         <v-flex xs6 lg10 pl-4>
                                             <v-layout column>
                                                 <v-flex xs12>
-                                                    <v-chip label small outline color="error" disabled v-if="props.item.category === 'book'">Books</v-chip>
+                                                    <v-chip label small outline color="error" disabled v-if="props.item.category === 'book'">Book</v-chip>
                                                     <v-chip label small outline color="info" disabled v-else-if="props.item.category === 'software'">Software</v-chip>
                                                     <v-chip label small outline color="success" disabled v-else-if="props.item.category === 'magazine'">Magazine</v-chip>
                                                     <v-chip label small outline color="grey" disabled v-else>Unknown</v-chip>
@@ -92,18 +103,6 @@
                         </div>
                     </v-data-iterator>
                 </v-container>
-
-
-
-
-
-
-
-
-
-
-
-
             </v-content>
         </v-app>
     </div>
@@ -115,9 +114,12 @@
     new Vue({
         el: '#app',
         data: () => ({
-            categories: ["All", "Book", "Software", "Magazine"],
+            uncheck: false,
+            filter: [],
+            filteredBooks: [],
+            categories: ["Book", "Software", "Magazine"],
             pagination: {},
-            keyword: "Dicks",
+            keyword: "",
             books: [{
                 "id": "B12345678",
                 "cover": "./images/books/1.jpg",
@@ -133,19 +135,46 @@
             for (let i = 0; i < 10; i++) {
                 this.books.push(this.books[0])
             }
+            this.allClicked()
         },
         methods: {
-
+            allClicked() {
+                if (this.filter.length >= this.categories.length) {
+                    this.filter.splice(0, this.filter.length)
+                } else {
+                    this.filter.splice(0, this.filter.length)
+                    this.categories.forEach(i => {
+                        this.filter.push(i.toLowerCase());
+                    })
+                }
+            }
+        },
+        watch: {
+            filter() {
+                this.filteredBooks.splice(0, this.filteredBooks.length);
+                this.books.forEach(b => {
+                    if (this.filter.includes(b.category.toLowerCase())) {
+                        this.filteredBooks.push(b)
+                    }
+                })
+            }
         },
         computed: {
+            allText() {
+                if (this.filter.length >= this.categories.length) {
+                    return "Unselect All"
+                }
+                return "Select All"
+            },
             pageMin() {
-                return 1;
+                let page = this.pagination.page - 1
+                let each = this.pagination.rowsPerPage - 0
+                let total = this.pagination.totalItems - 0
+                return page * each + 1;
             },
             pageMax() {
-                return 100;
-            },
-            totalResult() {
-                return 4000;
+                let max = this.pageMin + this.pagination.rowsPerPage - 1;
+                return max > this.pagination.totalItems ? this.pagination.totalItems : max
             }
         }
     })

@@ -1,0 +1,21 @@
+[{
+        "username": "ts",
+        "password": "ts1",
+        "role": "Teaching Staff"
+    },
+    {
+        "username": "nts",
+        "password": "nts",
+        "role": "Non-teaching staff"
+    },
+    {
+        "username": "stu",
+        "password": "stu1",
+        "role": "Student"
+    },
+    {
+        "username": "alu",
+        "password": "alu1",
+        "role": "Alumni"
+    }
+]
