@@ -198,6 +198,9 @@
                         this.filteredBooks.push(b)
                     }
                 })
+                let keyword = this.keyword;
+                this.keyword = "";
+                this.keyword = keyword;
             },
             page() {
                 window.scrollTo(0, 0);
