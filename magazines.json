@@ -1,0 +1,82 @@
+[{
+    "id": "M12345678",
+    "cover": "./images/magazines/1.jpg",
+    "title": "Science (22 Jan 2016)",
+    "author": "American Association for the Advancement of Science",
+    "publisher": "American Association for the Advancement of Science",
+    "category": "magazine",
+    "description": "Science, also widely referred to as Science Magazine, is the peer-reviewed academic journal of the American Association for the Advancement of Science (AAAS) and one of the world's top academic journals.",
+    "available": true
+}, {
+    "id": "M12345679",
+    "cover": "./images/magazines/2.jpg",
+    "title": "Nature (8 Feb 2018)",
+    "author": "Nature Publishing Group",
+    "publisher": "Nature Publishing Group",
+    "category": "magazine",
+    "description": "Nature is a British multidisciplinary scientific journal, first published on 4 November 1869. It was ranked the world's most cited scientific journal by the Science Edition of the 2010 Journal Citation Reports and is ascribed an impact factor of 40.137, making it one of the world's top academic journals. It is one of the few remaining academic journals that publishes original research across a wide range of scientific fields.",
+    "available": true
+}, {
+    "id": "M12345680",
+    "cover": "./images/magazines/3.jpg",
+    "title": "Forbes (12 Dec 2017)",
+    "author": "Forbes Media, LLC.",
+    "publisher": "Forbes Media, LLC.",
+    "category": "magazine",
+    "description": "Forbes is an American family-controlled business magazine. Published bi-weekly, it features original articles on finance, industry, investing, and marketing topics. Forbes also reports on related subjects such as technology, communications, science, politics, and law.",
+    "available": true
+}, {
+    "id": "M12345681",
+    "cover": "./images/magazines/4.jpg",
+    "title": "TIME (28 Dec 2015)",
+    "author": "Meredith Corporation",
+    "publisher": "Meredith Corporation",
+    "category": "magazine",
+    "description": "Time is an American weekly news magazine and news website published in New York City.",
+    "available": true
+}, {
+    "id": "M123456__",
+    "cover": "./images/magazines/_.jpg",
+    "title": "",
+    "author": "",
+    "publisher": "",
+    "category": "magazine",
+    "description": "",
+    "available": true
+}, {
+    "id": "M123456__",
+    "cover": "./images/magazines/_.jpg",
+    "title": "",
+    "author": "",
+    "publisher": "",
+    "category": "magazine",
+    "description": "",
+    "available": true
+}, {
+    "id": "M123456__",
+    "cover": "./images/magazines/_.jpg",
+    "title": "",
+    "author": "",
+    "publisher": "",
+    "category": "magazine",
+    "description": "",
+    "available": true
+}, {
+    "id": "M123456__",
+    "cover": "./images/magazines/_.jpg",
+    "title": "",
+    "author": "",
+    "publisher": "",
+    "category": "magazine",
+    "description": "",
+    "available": true
+}, {
+    "id": "M123456__",
+    "cover": "./images/magazines/_.jpg",
+    "title": "",
+    "author": "",
+    "publisher": "",
+    "category": "magazine",
+    "description": "",
+    "available": true
+}]
