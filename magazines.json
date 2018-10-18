@@ -1,0 +1,73 @@
+[{
+    "id": "M12345678",
+    "cover": "./images/magazines/1.jpg",
+    "title": "Science (22 Jan 2016)",
+    "author": "American Association for the Advancement of Science",
+    "publisher": "American Association for the Advancement of Science",
+    "category": "magazine",
+    "description": "Science, also widely referred to as Science Magazine, is the peer-reviewed academic journal of the American Association for the Advancement of Science (AAAS) and one of the world's top academic journals.",
+    "available": true
+}, {
+    "id": "M12345679",
+    "cover": "./images/magazines/2.jpg",
+    "title": "Nature (8 Feb 2018)",
+    "author": "Nature Publishing Group",
+    "publisher": "Nature Publishing Group",
+    "category": "magazine",
+    "description": "Nature is a British multidisciplinary scientific journal, first published on 4 November 1869. It was ranked the world's most cited scientific journal by the Science Edition of the 2010 Journal Citation Reports and is ascribed an impact factor of 40.137, making it one of the world's top academic journals. It is one of the few remaining academic journals that publishes original research across a wide range of scientific fields.",
+    "available": true
+}, {
+    "id": "M12345680",
+    "cover": "./images/magazines/3.jpg",
+    "title": "Forbes (12 Dec 2017)",
+    "author": "Forbes Media, LLC.",
+    "publisher": "Forbes Media, LLC.",
+    "category": "magazine",
+    "description": "Forbes is an American family-controlled business magazine. Published bi-weekly, it features original articles on finance, industry, investing, and marketing topics. Forbes also reports on related subjects such as technology, communications, science, politics, and law.",
+    "available": true
+}, {
+    "id": "M12345681",
+    "cover": "./images/magazines/4.jpg",
+    "title": "TIME (28 Dec 2015)",
+    "author": "Meredith Corporation",
+    "publisher": "Meredith Corporation",
+    "category": "magazine",
+    "description": "Time is an American weekly news magazine and news website published in New York City.",
+    "available": true
+}, {
+    "id": "M12345682",
+    "cover": "./images/magazines/5.jpg",
+    "title": "Aviation Week & Space Technology",
+    "author": "Gregory D. Hamilton",
+    "publisher": "Gregory D. Hamilton",
+    "category": "magazine",
+    "description": "Aviation Week & Space Technology, often abbreviated Aviation Week or AW&ST, is the flagship magazine of the Aviation Week Network. The weekly magazine is available in print and online, reporting on the aerospace, defense and aviation industries, with a core focus on aerospace technology.",
+    "available": true
+}, {
+    "id": "M12345683",
+    "cover": "./images/magazines/6.jpg",
+    "title": "Quill & Quire",
+    "author": "Sue Carter",
+    "publisher": "Sue Carter",
+    "category": "magazine",
+    "description": "Quill & Quire, a Canadian magazine about the book and publishing industry, was launched in 1935 and has an average circulation of 5,000 copies per issue, with a publisher-claimed readership of 25,000.",
+    "available": true
+}, {
+    "id": "M12345684",
+    "cover": "./images/magazines/7.jpg",
+    "title": "In These Times",
+    "author": "Joel Bleifuss",
+    "publisher": "Joel Bleifuss",
+    "category": "magazine",
+    "description": "In These Times is an American politically progressive/democratic socialist monthly magazine of news and opinion published in Chicago, Illinois.",
+    "available": true
+}, {
+    "id": "M12345687",
+    "cover": "./images/magazines/8.jpg",
+    "title": "Farm Journal Magazine",
+    "author": "Farm Journal",
+    "publisher": "Farm Journal",
+    "category": "magazine",
+    "description": "Farm Journal, the largest national U.S. farm magazine, is a prime source of practical information on crops and livestock for farm families. Published 12 times a year, the magazine emphasizes agricultural production, technology and policy. As the flagship of Farm Journal Media, Farm Journal has a rich history spanning 137 years of service to U.S. agriculture, quality journalism and innovations in circulation technology. Farm Journal was first published in March 1877 for farmers in the bountiful agricultural regions within a day’s ride of the publication’s office in Philadelphia.",
+    "available": true
+}]

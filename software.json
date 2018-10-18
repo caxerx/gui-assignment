@@ -1,4 +1,4 @@
-{
+[{
     "id": "S12345678",
     "cover": "./images/softwares/1.jpg",
     "title": "Microsoft Office 2016 Home Edition",
@@ -7,4 +7,94 @@
     "category": "software",
     "description": "Microsoft Office is a family of client software, server software, and services developed by Microsoft.",
     "available": false
-}
+}, {
+    "id": "S12345679",
+    "cover": "./images/softwares/2.png",
+    "title": "Adobe Photoshop CC 2018",
+    "author": "Adobe",
+    "publisher": "Adobe",
+    "category": "software",
+    "description": "Adobe Photoshop is a raster graphics editor developed and published by Adobe Systems for macOS and Windows.",
+    "available": true
+}, {
+    "id": "S12345680",
+    "cover": "./images/softwares/3.png",
+    "title": "Adobe Acrobat CC 2018",
+    "author": "Adobe",
+    "publisher": "Adobe",
+    "category": "software",
+    "description": "Adobe Acrobat is a family of application software and Web services developed by Adobe Systems to view, create, manipulate, print and manage files in Portable Document Format (PDF).",
+    "available": true
+}, {
+    "id": "S12345681",
+    "cover": "./images/softwares/4.png",
+    "title": "Adobe After Effects CC 2018",
+    "author": "Adobe",
+    "publisher": "Adobe",
+    "category": "software",
+    "description": "Adobe After Effects is a digital visual effects, motion graphics, and compositing application developed by Adobe Systems and used in the post-production process of film making and television production. Among other things, After Effects can be used for keying, tracking, compositing and animation. It also functions as a very basic non-linear editor, audio editor and media transcoder.",
+    "available": true
+}, {
+    "id": "S12345682",
+    "cover": "./images/softwares/5.png",
+    "title": "Adobe Dreamweaver CC 2018",
+    "author": "Adobe",
+    "publisher": "Adobe",
+    "category": "software",
+    "description": "Adobe Dreamweaver is a proprietary web development tool from Adobe Systems. It was created by Macromedia in 1997[1] and developed by them until Macromedia was acquired by Adobe Systems in 2005.",
+    "available": true
+}, {
+    "id": "S12345683",
+    "cover": "./images/softwares/6.png",
+    "title": "Adobe Illustrator CC 2018",
+    "author": "Adobe",
+    "publisher": "Adobe",
+    "category": "software",
+    "description": "Adobe Illustrator is a vector graphics editor developed and marketed by Adobe Systems.",
+    "available": true
+}, {
+    "id": "S12345684",
+    "cover": "./images/softwares/7.png",
+    "title": "Adobe Lightroom CC 2018",
+    "author": "Adobe",
+    "publisher": "Adobe",
+    "category": "software",
+    "description": "Adobe Lightroom (officially Adobe Photoshop Lightroom) is a family of image organization and image manipulation software developed by Adobe Systems for Windows and macOS.",
+    "available": true
+}, {
+    "id": "S12345685",
+    "cover": "./images/softwares/8.png",
+    "title": "Adobe Premiere Pro CC 2018",
+    "author": "Adobe",
+    "publisher": "Adobe",
+    "category": "software",
+    "description": "Adobe Premiere Pro is a timeline-based video editing app developed by Adobe Systems and published as part of the Adobe Creative Cloud licensing program.",
+    "available": true
+}, {
+    "id": "S123456__",
+    "cover": "./images/softwares/_.jpg",
+    "title": "",
+    "author": "",
+    "publisher": "",
+    "category": "software",
+    "description": "",
+    "available": true
+}, {
+    "id": "S123456__",
+    "cover": "./images/softwares/_.jpg",
+    "title": "",
+    "author": "",
+    "publisher": "",
+    "category": "software",
+    "description": "",
+    "available": true
+}, {
+    "id": "S123456__",
+    "cover": "./images/softwares/_.jpg",
+    "title": "",
+    "author": "",
+    "publisher": "",
+    "category": "software",
+    "description": "",
+    "available": true
+}]
