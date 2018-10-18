@@ -16,7 +16,22 @@
             <v-content class="primary">
                 <v-toolbar color="primary" dark flat app>
                     <v-spacer></v-spacer>
-                    Logged in as caxerx
+                    <v-layout justify-end align-center pt-3 pr-1>
+                        <div>
+                            <p class="text-xs-left">
+                                Logged in as <b class="red--grey">{{user.username}}</b>
+                                <br/> {{user.role}}
+                            </p>
+                        </div>
+                    </v-layout>
+                    <v-toolbar-action>
+                        <v-tooltip bottom>
+                            <v-btn @click="logout" slot="activator" icon>
+                                <v-icon>exit_to_app</v-icon>
+                            </v-btn>
+                            <span>Logout</span>
+                        </v-tooltip>
+                    </v-toolbar-action>
                 </v-toolbar>
                 <v-container fluid fill-height>
                     <v-layout align-center justify-center>
@@ -53,11 +68,24 @@
     new Vue({
         el: '#app',
         data: () => ({
-            keyword: ""
+            keyword: "",
+            user: {}
         }),
+        created() {
+            let user = localStorage.getItem("loggedInAs");
+            if (!user) {
+                window.location.href = "./index.html";
+                return;
+            }
+            this.user = JSON.parse(user);
+
+        },
         methods: {
             search() {
                 window.location.href = `./search-result.html?keyword=${this.keyword}`
+            },
+            logout() {
+                window.location.href = `./login.html`
             }
         }
     })

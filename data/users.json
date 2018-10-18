@@ -1,21 +1,25 @@
 [{
         "username": "ts",
         "password": "ts1",
-        "role": "Teaching Staff"
+        "role": "Teaching Staff",
+        "first": true
     },
     {
         "username": "nts",
         "password": "nts",
-        "role": "Non-teaching staff"
+        "role": "Non-teaching staff",
+        "first": true
     },
     {
         "username": "stu",
         "password": "stu1",
-        "role": "Student"
+        "role": "Student",
+        "first": true
     },
     {
         "username": "alu",
         "password": "alu1",
-        "role": "Alumni"
+        "role": "Alumni",
+        "first": true
     }
 ]

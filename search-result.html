@@ -15,6 +15,23 @@
         <v-app id="inspire">
             <v-toolbar color="primary" app clipped-left dark>
                 <v-toolbar-title>Library System</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-layout justify-end align-center pt-3 pr-1>
+                    <div>
+                        <p class="text-xs-left">
+                            Logged in as <b class="red--grey">{{user.username}}</b>
+                            <br/> {{user.role}}
+                        </p>
+                    </div>
+                </v-layout>
+                <div>
+                    <v-tooltip bottom>
+                        <v-btn @click="logout" slot="activator" icon>
+                            <v-icon>exit_to_app</v-icon>
+                        </v-btn>
+                        <span>Logout</span>
+                    </v-tooltip>
+                </div>
             </v-toolbar>
             <v-navigation-drawer app clipped>
                 <v-layout column>
@@ -110,6 +127,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js "></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js "></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.js"></script>
 <script>
     new Vue({
         el: '#app',
@@ -120,22 +138,42 @@
             categories: ["Book", "Software", "Magazine"],
             pagination: {},
             keyword: "",
-            books: [{
-                "id": "B12345678",
-                "cover": "./images/books/2.jpg",
-                "title": "Player's Handbook (Dungeons & Dragons)",
-                "author": "Wizards RPG Team",
-                "publisher": "Wizards of the Coast",
-                "category": "book",
-                "description": "The Player’s Handbook is the essential reference for every Dungeons & Dragons roleplayer. It contains rules for character creation and advancement, backgrounds and skills, exploration and combat, equipment, spells, and much more. Use this book to create characters from among the most iconic D&D races and classes.",
-                "available": true
-            }]
+            books: [],
+            user: {}
         }),
         created() {
-            for (let i = 0; i < 10; i++) {
-                this.books.push(this.books[0])
+            let user = localStorage.getItem("loggedInAs");
+            if (!user) {
+                window.location.href = "./index.html";
+                return;
             }
-            this.allClicked()
+            this.user = JSON.parse(user);
+
+            let bk = axios.get("./data/books.json").then(resp => {
+                resp.data.forEach(item => {
+                    this.books.push(item);
+                })
+            })
+
+
+            let sf = axios.get("./data/software.json").then(resp => {
+                resp.data.forEach(item => {
+                    this.books.push(item);
+                })
+            })
+
+            let mz = axios.get("./data/magazines.json").then(resp => {
+                resp.data.forEach(item => {
+                    this.books.push(item);
+                })
+            })
+
+            let urlParams = new URLSearchParams(window.location.search);
+            this.keyword = urlParams.get('keyword');
+
+            Promise.all(bk, sf, mz).then(() => {
+                this.allClicked()
+            })
         },
         methods: {
             allClicked() {
@@ -147,6 +185,9 @@
                         this.filter.push(i.toLowerCase());
                     })
                 }
+            },
+            logout() {
+                window.location.href = `./login.html`
             }
         },
         watch: {
