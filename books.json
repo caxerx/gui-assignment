@@ -1,0 +1,28 @@
+[{
+    "id": "B12345678",
+    "cover": "./images/books/2.jpg",
+    "title": "Player's Handbook (Dungeons & Dragons)",
+    "author": "Wizards RPG Team",
+    "publisher": "Wizards of the Coast",
+    "category": "book",
+    "description": "The Player’s Handbook is the essential reference for every Dungeons & Dragons roleplayer. It contains rules for character creation and advancement, backgrounds and skills, exploration and combat, equipment, spells, and much more. Use this book to create characters from among the most iconic D&D races and classes.",
+    "available": true
+}, {
+    "id": "B12345679",
+    "cover": "./images/books/3.jpg",
+    "title": "Dungeon Master's Guide (D&D Core Rulebook)",
+    "author": "Wizards RPG Team",
+    "publisher": "Wizards of the Coast",
+    "category": "book",
+    "description": "The Dungeon Master’s Guide provides the inspiration and the guidance you need to spark your imagination and create worlds of adventure for your players to explore and enjoy.",
+    "available": false
+}, {
+    "id": "B12345680",
+    "cover": "./images/books/4.jpg",
+    "title": "Monster Manual (D&D Core Rulebook)",
+    "author": "Wizards RPG Team",
+    "publisher": "Wizards of the Coast",
+    "category": "book",
+    "description": "The Monster Manual presents a horde of classic Dungeons & Dragons creatures, including dragons, giants, mind flayers, and beholders–a monstrous feast for Dungeon Masters ready to challenge their players and populate their adventures.",
+    "available": true
+}]
