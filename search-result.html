@@ -214,12 +214,14 @@
                 return "Select All"
             },
             pageMin() {
+                if (this.pagination.rowsPerPage == -1) return 1
                 let page = this.pagination.page - 1
                 let each = this.pagination.rowsPerPage - 0
                 let total = this.pagination.totalItems - 0
                 return page * each + 1;
             },
             pageMax() {
+                if (this.pagination.rowsPerPage == -1) return this.pagination.totalItems
                 let max = this.pageMin + this.pagination.rowsPerPage - 1;
                 return max > this.pagination.totalItems ? this.pagination.totalItems : max
             }
