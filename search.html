@@ -14,36 +14,55 @@
     <div id="app">
         <v-app id="inspire">
             <v-navigation-drawer app>
-
+                <v-layout column>
+                    <v-flex xs12>
+                        <v-text-field prepend-inner-icon="search" hide-details single-line solo v-model="keyword"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 mt-3 px-3>
+                        <span class="body-2">Filter by category</span>
+                        <div v-for="c in categories">
+                            <v-checkbox :label="c" single-line hide-details></v-checkbox>
+                        </div>
+                    </v-flex>
+                </v-layout>
             </v-navigation-drawer>
             <v-content>
+                <v-toolbar flat>
+                    {{pageMin}}-{{pageMax}} of over {{totalResult}} results for "{{keyword}}"
+                </v-toolbar>
+                <v-divider></v-divider>
                 <v-container>
-                    <v-card flat>
-                        <v-layout row py-3>
-                            <v-flex xs2 pa-2>
+                    <v-card>
+                        <v-layout row py-3 fill-height>
+                            <v-flex xs2 pa-2 ml-3>
                                 <v-img src="./images/books/1.jpg" max-width="300" max-height="300" contain></v-img>
                             </v-flex>
 
                             <v-flex px-5>
+
                                 <v-layout column>
                                     <v-flex xs12>
                                         <v-chip label small outline color="error" disabled>Books</v-chip> <a class="subheading">ANYWAY
                                             The Devil's Highway: A True Story</a> <span class="caption">Feb 27, 2018</span>
                                         <p>
                                             <span class="caption">by Luis Alberto Urrea (Author, Narrator), Hachette Audio
-                                                (Publisher)</span>
+                                                (Publisher)
+                                            </span>
                                         </p>
                                     </v-flex>
-                                </v-layout>
-                                <v-divider></v-divider>
-                                <v-layout column mt-3 align-space-around>
-                                    <v-flex>
+
+                                    <v-divider></v-divider>
+
+                                    <v-flex xs12 mt-3>
                                         <p class="body-2">The author of Across the Wire offers brilliant investigative reporting
                                             of what went wrong when, in May 2001, a group of 26 men attempted to cross the
                                             Mexican border into the desert of Southern Arizona. Only 12 men came back out.</p>
                                     </v-flex>
+
+                                    <v-divider></v-divider>
+
+
                                 </v-layout>
-                                <v-divider></v-divider>
                             </v-flex>
                         </v-layout>
                     </v-card>
@@ -59,10 +78,22 @@
     new Vue({
         el: '#app',
         data: () => ({
-
+            categories: ["All", "Book", "Software", "Megazine"],
+            keyword: "Dicks"
         }),
         methods: {
 
+        },
+        computed: {
+            pageMin() {
+                return 1;
+            },
+            pageMax() {
+                return 100;
+            },
+            totalResult() {
+                return 4000;
+            }
         }
     })
 </script>

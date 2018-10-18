@@ -28,8 +28,10 @@
                                         <v-container class="px-5">
                                             <p class="headline text-xs-center primary--text">Login</p>
                                             <v-form @submit.prevent="login" ref="loginForm" v-model="valid" lazy-validation>
-                                                <v-text-field prepend-icon="person" name="login" label="User ID" type="text" v-model="loginInfo.UserId" required :rules="userIdRules"></v-text-field>
-                                                <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password" v-model="loginInfo.Password" autocomplete="current-password" required :rules="passwordRules"></v-text-field>
+                                                <v-text-field prepend-icon="person" name="login" label="User ID" type="text" v-model="loginInfo.UserId" required :rules="userIdRules"
+                                                    validate-on-blur></v-text-field>
+                                                <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password" v-model="loginInfo.Password"
+                                                    autocomplete="current-password" required :rules="passwordRules" validate-on-blur></v-text-field>
                                             </v-form>
                                             <v-flex>
                                                 <v-expansion-panel v-model="loginFailed" class="elevation-0">
@@ -61,10 +63,13 @@
                                         <v-container class="px-5" leave-absolute hide-on-leave>
                                             <p class="headline text-xs-center primary--text">Reset Password</p>
                                             <v-form @submit.prevent="login" ref="resetForm" v-model="valid" lazy-validation>
-                                                <v-text-field prepend-icon="email" name="login" label="Email" type="text" v-model="loginInfo.UserId" required :rules="emailRules"></v-text-field>
+                                                <v-text-field prepend-icon="email" name="login" label="Email" type="text" v-model="loginInfo.UserId" required :rules="emailRules"
+                                                    validate-on-blur></v-text-field>
                                             </v-form>
                                             <v-layout class="align-center justify-center mt-3">
-                                                <v-btn depressed color="primary" type="submit" @click="snack">Request Password Reset</v-btn>
+                                                <v-btn depressed color="primary" type="submit" @click="snack">Request Password
+                                                    Reset
+                                                </v-btn>
                                             </v-layout>
                                         </v-container>
                                     </v-card>
