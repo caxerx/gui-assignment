@@ -31,7 +31,7 @@
             </v-navigation-drawer>
             <v-content>
 
-                <v-toolbar flat>
+                <v-toolbar flat style="position:fixed; z-index:10">
                     {{pageMin}}-{{pageMax}} of over {{totalResult}} results for "{{keyword}}" {{pagination}}
                 </v-toolbar>
 
@@ -46,14 +46,16 @@
                                     <v-layout row>
                                         <v-flex>
                                             <v-layout row align-center justify-center>
-                                                <v-img :src="props.item.cover" max-height="300" max-width="300" contain/>
+                                                <v-img :src="props.item.cover" max-height="300" max-width="300" contain />
                                             </v-layout>
                                             <v-layout column pt-3 align-center>
                                                 <v-flex>
-                                                    <v-chip label small color="success" text-color="white" disabled v-if="props.item.available === true">
+                                                    <v-chip label small color="success" text-color="white" disabled
+                                                        v-if="props.item.available === true">
                                                         Available
                                                     </v-chip>
-                                                    <v-chip label small color="error" text-color="white" disabled v-else>
+                                                    <v-chip label small color="error" text-color="white" disabled
+                                                        v-else>
                                                         Not Available
                                                     </v-chip>
                                                 </v-flex>
@@ -70,7 +72,7 @@
                                                     <a class="subheading">{{props.item.title}}</a>
                                                     <p>
                                                         <span class="caption">by {{props.item.author}}</span>
-                                                        <br/>
+                                                        <br />
                                                         <span class="caption">Code: {{props.item.id}}</span>
                                                     </p>
                                                 </v-flex>

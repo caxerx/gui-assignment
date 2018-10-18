@@ -1,0 +1,10 @@
+{
+    "id": "S12345678",
+    "cover": "./images/softwares/1.jpg",
+    "title": "Microsoft Office 2016 Home Edition",
+    "author": "Microsoft",
+    "publisher": "Microsoft",
+    "category": "software",
+    "description": "Microsoft Office is a family of client software, server software, and services developed by Microsoft.",
+    "available": false
+}
