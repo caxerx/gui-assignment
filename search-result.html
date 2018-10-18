@@ -200,7 +200,9 @@
                 })
                 let keyword = this.keyword;
                 this.keyword = "";
-                this.keyword = keyword;
+                setTimeout(() => {
+                    this.keyword = keyword;
+                }, 1)
             },
             page() {
                 window.scrollTo(0, 0);
