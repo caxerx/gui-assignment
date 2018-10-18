@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search - Library System</title>
+</head>
+
+<body>
+    <div id="app">
+        <v-app id="inspire">
+            <v-toolbar color="primary" app clipped-left dark>
+                <v-toolbar-title>Library System</v-toolbar-title>
+            </v-toolbar>
+            <v-navigation-drawer app clipped>
+                <v-layout column>
+                    <v-flex xs12>
+                        <v-text-field prepend-inner-icon="search" hide-details single-line solo v-model="keyword"></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 mt-3 px-3>
+                        <span class="body-2">Filter by category</span>
+                        <div v-for="c in categories">
+                            <v-checkbox :label="c" single-line hide-details></v-checkbox>
+                        </div>
+                    </v-flex>
+                </v-layout>
+            </v-navigation-drawer>
+            <v-content>
+
+                <v-toolbar flat>
+                    {{pageMin}}-{{pageMax}} of over {{totalResult}} results for "{{keyword}}" {{pagination}}
+                </v-toolbar>
+
+                <v-divider></v-divider>
+
+                <v-container>
+
+                    <v-data-iterator column :items="books" :pagination.sync="pagination" content-tag="div">
+                        <div slot="item" slot-scope="props">
+                            <v-card class="mt-4">
+                                <v-container>
+                                    <v-layout row>
+                                        <v-flex>
+                                            <v-layout row align-center justify-center>
+                                                <v-img :src="props.item.cover" max-height="300" max-width="300" contain/>
+                                            </v-layout>
+                                            <v-layout column pt-3 align-center>
+                                                <v-flex>
+                                                    <v-chip label small color="success" text-color="white" disabled v-if="props.item.available === true">
+                                                        Available
+                                                    </v-chip>
+                                                    <v-chip label small color="error" text-color="white" disabled v-else>
+                                                        Not Available
+                                                    </v-chip>
+                                                </v-flex>
+                                            </v-layout>
+                                        </v-flex>
+                                        <v-flex xs6 lg10 pl-4>
+                                            <v-layout column>
+                                                <v-flex xs12>
+                                                    <v-chip label small outline color="error" disabled v-if="props.item.category === 'book'">Books</v-chip>
+                                                    <v-chip label small outline color="info" disabled v-else-if="props.item.category === 'software'">Software</v-chip>
+                                                    <v-chip label small outline color="success" disabled v-else-if="props.item.category === 'magazine'">Magazine</v-chip>
+                                                    <v-chip label small outline color="grey" disabled v-else>Unknown</v-chip>
+
+                                                    <a class="subheading">{{props.item.title}}</a>
+                                                    <p>
+                                                        <span class="caption">by {{props.item.author}}</span>
+                                                        <br/>
+                                                        <span class="caption">Code: {{props.item.id}}</span>
+                                                    </p>
+                                                </v-flex>
+                                                <v-flex xs12 pb-3>
+                                                    <v-divider></v-divider>
+                                                </v-flex>
+
+                                                <v-flex xs12>
+                                                    <p class="body-2">{{props.item.description}}</p>
+                                                </v-flex>
+                                            </v-layout>
+                                        </v-flex>
+
+                                    </v-layout>
+                                </v-container>
+                            </v-card>
+                        </div>
+                    </v-data-iterator>
+                </v-container>
+
+
+
+
+
+
+
+
+
+
+
+
+            </v-content>
+        </v-app>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js "></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js "></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: () => ({
+            categories: ["All", "Book", "Software", "Magazine"],
+            pagination: {},
+            keyword: "Dicks",
+            books: [{
+                "id": "B12345678",
+                "cover": "./images/books/1.jpg",
+                "title": "Player's Handbook (Dungeons & Dragons)",
+                "author": "Wizards RPG Team",
+                "publisher": "Wizards of the Coast",
+                "category": "book",
+                "description": "The Player’s Handbook is the essential reference for every Dungeons & Dragons roleplayer. It contains rules for character creation and advancement, backgrounds and skills, exploration and combat, equipment, spells, and much more. Use this book to create characters from among the most iconic D&D races and classes.",
+                "available": true
+            }]
+        }),
+        created() {
+            for (let i = 0; i < 10; i++) {
+                this.books.push(this.books[0])
+            }
+        },
+        methods: {
+
+        },
+        computed: {
+            pageMin() {
+                return 1;
+            },
+            pageMax() {
+                return 100;
+            },
+            totalResult() {
+                return 4000;
+            }
+        }
+    })
+</script>
+
+</html>
+
+</html>
