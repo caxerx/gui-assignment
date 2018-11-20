@@ -16,53 +16,94 @@
             <v-toolbar color="primary" app clipped-left dark>
                 <v-toolbar-title>Library System</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-toolbar-items>
-                    <v-tooltip left>
-                        <v-menu slot="activator" :close-on-content-click="false" max-height="400" attach nudge-bottom="60" nudge-left="320">
-                            <v-btn icon slot="activator">
-                                <v-icon>
-                                    archive
-                                </v-icon>
-                            </v-btn>
-                            <v-card width="500">
-                                <v-toolbar fixed>
-                                    Reserve List ({{reserveList.length}}/{{maxAllowReserve}})
-                                    <v-spacer></v-spacer>
-                                    <v-icon size="14" @click="">clear</v-icon>
-                                </v-toolbar>
+                <v-menu attach offset-y>
+                    <v-tooltip left slot="activator">
+                        <v-btn icon slot="activator">
+                            <v-icon>
+                                apps
+                            </v-icon>
+                        </v-btn>
+                        <span>More Function</span>
+                    </v-tooltip>
+                    <v-card width="250" class="pt-3">
+                        <p class="subheading text-xs-center">More Functions</p>
+                        <v-divider></v-divider>
+                        <v-list>
+                            <v-list-tile @click="href('search-result.html')">
+                                <v-list-tile-action>
+                                    <v-icon>chrome_reader_mode</v-icon>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>
+                                        Book List
+                                    </v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                            <v-list-tile @click="href('book-room.html')">
+                                <v-list-tile-action>
+                                    <v-icon>meeting_room</v-icon>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>
+                                        Book a Room
+                                    </v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list>
+                    </v-card>
+                </v-menu>
 
-                                <v-list three-line style="padding-top: 64px;">
-                                    <v-list-tile v-for="b in reserveList" :key="b.id">
-                                        <v-list-tile-action>
-                                            <v-img :src="b.cover" max-height="50" max-width="45" contain></v-img>
-                                        </v-list-tile-action>
-                                        <v-list-tile-content>
-                                            <v-list-tile-title>
-                                                {{b.title}}
-                                            </v-list-tile-title>
-                                            <v-list-tile-sub-title>
-                                                by {{b.author}}
-                                            </v-list-tile-sub-title>
-                                        </v-list-tile-content>
-                                        <v-list-tile-action>
-                                            <div>
-                                                <v-tooltip top>
-                                                    <v-btn icon slot="activator" @click="removeReserve(b)">
-                                                        <v-icon color="red">clear</v-icon>
-                                                    </v-btn>
-                                                    <span>Cancel Reserve</span>
-                                                </v-tooltip>
-                                            </div>
-                                        </v-list-tile-action>
-                                    </v-list-tile>
-                                </v-list>
-                            </v-card>
-                        </v-menu>
-
+                <v-menu :close-on-content-click="false" max-height="400" attach nudge-bottom="60" nudge-left="320">
+                    <v-tooltip left slot="activator">
+                        <v-btn icon slot="activator">
+                            <v-icon>
+                                archive
+                            </v-icon>
+                        </v-btn>
                         <span>Reserve List</span>
                     </v-tooltip>
+                    <v-card width="500">
+                        <v-toolbar fixed>
+                            Reserve List ({{reserveList.length}}/{{maxAllowReserve}})
+                            <v-spacer></v-spacer>
+                            <v-icon size="14" @click="">clear</v-icon>
+                        </v-toolbar>
+                        <div style="padding-top:64px; height: 336px; overflow: scroll;">
+                            <v-list three-line>
+                                <v-list-tile v-if="reserveList.length==0">
+                                    <v-layout justify-center align-center>
+                                        No book reserved.
+                                    </v-layout>
+                                </v-list-tile>
+                                <v-list-tile v-for="b in reserveList" :key="b.id">
+                                    <v-list-tile-action>
+                                        <v-img :src="b.cover" max-height="50" max-width="45" contain></v-img>
+                                    </v-list-tile-action>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>
+                                            {{b.title}}
+                                        </v-list-tile-title>
+                                        <v-list-tile-sub-title>
+                                            by {{b.author}}
+                                        </v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                    <v-list-tile-action>
+                                        <div>
+                                            <v-tooltip top>
+                                                <v-btn icon slot="activator" @click="removeReserve(b)">
+                                                    <v-icon color="red">clear</v-icon>
+                                                </v-btn>
+                                                <span>Cancel Reserve</span>
+                                            </v-tooltip>
+                                        </div>
+                                    </v-list-tile-action>
+                                </v-list-tile>
+                            </v-list>
 
-                </v-toolbar-items>
+                        </div>
+                    </v-card>
+                </v-menu>
+
                 <v-toolbar-items>
                     <v-layout justify-end align-center pt-3 pr-1>
                         <div>
@@ -487,7 +528,7 @@
                     this.keyword = " ";
                     setTimeout(() => {
                         this.keyword = ""
-                    }, 1)
+                    }, 100)
                 }
             })
 
@@ -497,6 +538,9 @@
             }
         },
         methods: {
+            href(link) {
+                location.href = link;
+            },
             removeReserve(book) {
                 this.bookRemove = book;
                 this.dialogRemove = true;
@@ -640,6 +684,10 @@
     
     .trans:hover {
         opacity: 0.7;
+    }
+    
+     ::-webkit-scrollbar {
+        display: none;
     }
 </style>
 
