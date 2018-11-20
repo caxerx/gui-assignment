@@ -6,7 +6,8 @@
     "publisher": "Microsoft",
     "category": "software",
     "description": "Microsoft Office is a family of client software, server software, and services developed by Microsoft.",
-    "available": false
+    "available": false,
+    "content": ["<img src=\"./images/softwares/1.jpg\"/>"]
 }, {
     "id": "S12345679",
     "cover": "./images/softwares/2.png",
