@@ -479,6 +479,8 @@
 
             let urlParams = new URLSearchParams(window.location.search);
             Promise.all([bk, sf, mz]).then(() => {
+                let urlParams = new URLSearchParams(window.location.search);
+                this.keyword = urlParams.get('keyword');
                 this.allClicked()
                 this.keyword = urlParams.get('keyword');
                 if (this.keyword == "") {
@@ -546,6 +548,11 @@
                         this.filteredBooks.push(b)
                     }
                 })
+                let keyword = this.keyword;
+                this.keyword = keyword == "" ? " " : "";
+                setTimeout(() => {
+                    this.keyword = keyword;
+                }, 1)
             },
             setReserveList() {
                 localStorage.setItem(this.reserveListName, JSON.stringify(this.reserveList))
@@ -611,12 +618,14 @@
                 return "Select All"
             },
             pageMin() {
+                if (this.pagination.rowsPerPage == -1) return 1
                 let page = this.pagination.page - 1
                 let each = this.pagination.rowsPerPage - 0
                 let total = this.pagination.totalItems - 0
                 return page * each + 1;
             },
             pageMax() {
+                if (this.pagination.rowsPerPage == -1) return this.pagination.totalItems
                 let max = this.pageMin + this.pagination.rowsPerPage - 1;
                 return max > this.pagination.totalItems ? this.pagination.totalItems : max
             }

@@ -4,9 +4,10 @@
     if (!localStorage.getItem("init")) {
         axios.get("./data/users.json").then(resp => {
             localStorage.setItem("users", JSON.stringify(resp.data))
+            localStorage.setItem("init", true)
+            window.location.href = './login.html'
         })
-
-        localStorage.setItem("init", true)
+    }else{
+        window.location.href = './login.html'
     }
-    window.location.href = './login.html'
 </script>
