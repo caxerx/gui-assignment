@@ -186,7 +186,7 @@
                                                 <template slot="items" slot-scope="props">
                                                     <td class="text-xs-left">{{props.item.time}}</td>
                                                     <td class="text-xs-left">
-                                                        <a v-if="props.item.d0.available" @click="selectDate(props.item.d0.date,props.item.d0.time)">Avaliable</a>
+                                                        <a v-if="props.item.d0.available" @click="selectDate(props.item.d0.date,props.item.d0.time)">Available</a>
                                                         <span v-else="props.item.d0.available" class="red--text">Not Avaliable</span>
                                                     </td>
                                                     <td class="text-xs-left">

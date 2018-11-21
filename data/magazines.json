@@ -6,7 +6,8 @@
     "publisher": "American Association for the Advancement of Science",
     "category": "magazine",
     "description": "Science, also widely referred to as Science Magazine, is the peer-reviewed academic journal of the American Association for the Advancement of Science (AAAS) and one of the world's top academic journals.",
-    "available": false
+    "available": false,
+    "content": ["<img src=\"./images/magazines/magap1.png\"/>", "<img src=\"./images/magazines/magap2.png\"/>"]
 }, {
     "id": "M12345679",
     "cover": "./images/magazines/2.jpg",
@@ -15,7 +16,8 @@
     "publisher": "Nature Publishing Group",
     "category": "magazine",
     "description": "Nature is a British multidisciplinary scientific journal, first published on 4 November 1869. It was ranked the world's most cited scientific journal by the Science Edition of the 2010 Journal Citation Reports and is ascribed an impact factor of 40.137, making it one of the world's top academic journals. It is one of the few remaining academic journals that publishes original research across a wide range of scientific fields.",
-    "available": true
+    "available": true,
+    "content": ["<img src=\"./images/magazines/magap3.png\"/>", "<img src=\"./images/magazines/magap4.png\"/>"]
 }, {
     "id": "M12345680",
     "cover": "./images/magazines/3.jpg",
