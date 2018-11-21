@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search - Library System</title>
+</head>
+
+<body>
+    <div id="app">
+        <v-app id="inspire">
+            <v-toolbar color="primary" app clipped-left dark>
+                <v-toolbar-title>
+                    Library System
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-menu attach offset-y>
+                    <v-tooltip left slot="activator">
+                        <v-btn icon slot="activator">
+                            <v-icon>
+                                apps
+                            </v-icon>
+                        </v-btn>
+                        <span>More Function</span>
+                    </v-tooltip>
+                    <v-card width="250" class="pt-3">
+                        <p class="subheading text-xs-center">More Functions</p>
+                        <v-divider></v-divider>
+                        <v-list>
+                            <v-list-tile @click="href('search-result.html')">
+                                <v-list-tile-action>
+                                    <v-icon>chrome_reader_mode</v-icon>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>
+                                        Book List
+                                    </v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                            <v-list-tile @click="href('book-room.html')">
+                                <v-list-tile-action>
+                                    <v-icon>meeting_room</v-icon>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>
+                                        Book a Room
+                                    </v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list>
+                    </v-card>
+                </v-menu>
+
+                <v-menu :close-on-content-click="false" max-height="400" attach nudge-bottom="60" nudge-left="320">
+                    <v-tooltip left slot="activator">
+                        <v-btn icon slot="activator">
+                            <v-icon>
+                                archive
+                            </v-icon>
+                        </v-btn>
+                        <span>Reserve List</span>
+                    </v-tooltip>
+                    <v-card width="500">
+                        <v-toolbar fixed>
+                            Reserve List ({{reserveList.length}}/{{maxAllowReserve}})
+                            <v-spacer></v-spacer>
+                            <v-icon size="14" @click="">clear</v-icon>
+                        </v-toolbar>
+                        <div style="margin-top:64px; height: 336px; overflow: scroll; overflow-x:hidden;">
+                            <v-list three-line>
+                                <v-list-tile v-if="reserveList.length==0">
+                                    <v-layout justify-center align-center>
+                                        No book reserved.
+                                    </v-layout>
+                                </v-list-tile>
+                                <v-list-tile v-for="b in reserveList" :key="b.id">
+                                    <v-list-tile-action>
+                                        <v-img :src="b.cover" max-height="50" max-width="45" contain></v-img>
+                                    </v-list-tile-action>
+                                    <v-list-tile-content>
+                                        <v-list-tile-title>
+                                            {{b.title}}
+                                        </v-list-tile-title>
+                                        <v-list-tile-sub-title>
+                                            by {{b.author}}
+                                        </v-list-tile-sub-title>
+                                        <v-list-tile-sub-title>
+                                            Pickup Before: {{b.pickupTime}}
+                                        </v-list-tile-sub-title>
+                                    </v-list-tile-content>
+                                    <v-list-tile-action>
+                                        <div>
+                                            <v-tooltip top>
+                                                <v-btn icon slot="activator" @click="removeReserve(b)">
+                                                    <v-icon color="red">clear</v-icon>
+                                                </v-btn>
+                                                <span>Cancel Reserve</span>
+                                            </v-tooltip>
+                                        </div>
+                                    </v-list-tile-action>
+                                </v-list-tile>
+                            </v-list>
+
+                        </div>
+                    </v-card>
+                </v-menu>
+
+                <v-toolbar-items>
+                    <v-layout justify-end align-center pt-3 pr-1>
+                        <div>
+                            <p class="text-xs-left">
+                                Logged in as <b class="red--grey">{{user.username}}</b>
+                                <br/> {{user.role}}
+                            </p>
+                        </div>
+                    </v-layout>
+                </v-toolbar-items>
+                <v-toolbar-items>
+                    <v-menu z-index="1000" offset-y nudge-left="75" nudge-bottom="22" attach>
+                        <v-btn icon slot="activator">
+                            <v-icon color="white">
+                                account_circle
+                            </v-icon>
+                        </v-btn>
+                        <v-list dense>
+                            <v-list-tile @click="logout">
+                                <v-list-tile-avatar>
+                                    <v-icon>exit_to_app</v-icon>
+                                </v-list-tile-avatar>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>
+                                        Logout
+                                    </v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list>
+                    </v-menu>
+                </v-toolbar-items>
+            </v-toolbar>
+
+            <v-content>
+                <v-container>
+                    <v-layout pb-4>
+                        <v-flex>
+                            <h3 class="display-3">Room Booking</h3>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout column>
+                        <v-flex>
+                            <v-layout row>
+                                <v-flex xs4 pr-4>
+                                    <v-card>
+                                        <v-container>
+                                            <div class="headline">Book Details</div>
+                                            <v-form v-model="valid" ref="bookForm" lazy-validation>
+                                                <v-select v-model="room" label="Room" required prepend-icon="meeting_room" :items="rooms"></v-select>
+                                                <v-text-field v-model="date" label="Date" required prepend-icon="today" readonly :rules="requiredRules" validate-on-blur></v-text-field>
+                                                <v-text-field v-model="time" label="Time" required prepend-icon="access_time" readonly :rules="requiredRules" validate-on-blur></v-text-field>
+                                                <v-layout align-center justify-center>
+                                                    <v-flex>
+                                                        <v-select v-model="duration" label="Duration" required prepend-icon="timer" :items="[1,2]"></v-select>
+                                                    </v-flex>
+                                                    <v-flex xs1 class="text-xs-right">
+                                                        Hours
+                                                    </v-flex>
+                                                </v-layout>
+                                                <v-textarea prepend-icon="note" label="Remarks (Optional)" row-height="34" v-model="remark"></v-textarea>
+                                            </v-form>
+                                        </v-container>
+                                        <v-divider></v-divider>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn flat color="primary" @click="bookRoom">Book Room</v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-flex>
+                                <v-flex xs8>
+                                    <v-card>
+                                        <v-container>
+                                            <div class="headline">Available time in Room {{room}}</div>
+                                            <v-data-table hide-actions :items="itm" :headers="allowDatesHeader">
+                                                <template slot="items" slot-scope="props">
+                                                    <td class="text-xs-left">{{props.item.time}}</td>
+                                                    <td class="text-xs-left">
+                                                        <a v-if="props.item.d0.available" @click="selectDate(props.item.d0.date,props.item.d0.time)">Avaliable</a>
+                                                        <span v-else="props.item.d0.available" class="red--text">Not Avaliable</span>
+                                                    </td>
+                                                    <td class="text-xs-left">
+                                                            <a v-if="props.item.d1.available" @click="selectDate(props.item.d1.date,props.item.d1.time)">Avaliable</a>
+                                                            <span v-else="props.item.d1.available" class="red--text">Not Avaliable</span>
+                                                    </td>
+                                                    <td class="text-xs-left">
+                                                            <a v-if="props.item.d2.available" @click="selectDate(props.item.d2.date,props.item.d2.time)">Avaliable</a>
+                                                            <span v-else="props.item.d2.available" class="red--text">Not Avaliable</span>
+                                                    </td>
+                                                    <td class="text-xs-left">
+                                                            <a v-if="props.item.d3.available" @click="selectDate(props.item.d3.date,props.item.d3.time)">Avaliable</a>
+                                                            <span v-else="props.item.d3.available" class="red--text">Not Avaliable</span>
+                                                    </td>
+                                                    <td class="text-xs-left">
+                                                            <a v-if="props.item.d4.available" @click="selectDate(props.item.d4.date,props.item.d4.time)">Avaliable</a>
+                                                            <span v-else="props.item.d4.available" class="red--text">Not Avaliable</span>
+                                                    </td>
+                                                    <td class="text-xs-left">
+                                                            <a v-if="props.item.d5.available" @click="selectDate(props.item.d5.date,props.item.d5.time)">Avaliable</a>
+                                                            <span v-else="props.item.d5.available" class="red--text">Not Avaliable</span>
+                                                    </td>
+                                                    <td class="text-xs-left">
+                                                            <a v-if="props.item.d6.available" @click="selectDate(props.item.d6.date,props.item.d6.time)">Avaliable</a>
+                                                            <span v-else="props.item.d6.available" class="red--text">Not Avaliable</span>
+                                                    </td>
+                                                </template>
+                                            </v-data-table>
+                                        </v-container>
+                                    </v-card>
+                                </v-flex>
+                            </v-layout>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
+
+                <v-dialog v-model="dialogRemove" max-width="500">
+                    <v-card width="500">
+                        <v-card-title class="grey lighten-3">
+                            Remove Reservered Item
+                            <v-spacer></v-spacer>
+                            <v-btn icon small @click="dialogRemove=false">
+                                <v-icon size="18">
+                                    clear
+                                </v-icon>
+                            </v-btn>
+                        </v-card-title>
+
+                        <v-card-text>
+                            Are you sure to remove this item from reserve list?
+                        </v-card-text>
+                        <v-list three-line>
+                            <v-list-tile>
+                                <v-list-tile-action>
+                                    <v-img :src="bookRemove.cover" max-height="50" max-width="45" contain></v-img>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+                                    <v-list-tile-title>
+                                        {{bookRemove.title}}
+                                    </v-list-tile-title>
+                                    <v-list-tile-sub-title>
+                                        by {{bookRemove.author}}
+                                    </v-list-tile-sub-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </v-list>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn flat @click="dialogRemove=false">
+                                Cancel
+                            </v-btn>
+                            <v-btn color="primary" flat @click="removeConfirm">
+                                Confirm
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+
+                <v-dialog v-model="dialogTsna" max-width="500">
+                    <v-card width="500">
+                        <v-card-title class="grey lighten-3">
+                            Timeslot Not Avaliable
+                            <v-spacer></v-spacer>
+                            <v-btn icon small @click="dialogTsna=false">
+                                <v-icon size="18">
+                                    clear
+                                </v-icon>
+                            </v-btn>
+                        </v-card-title>
+
+                        <v-card-text>
+                            <v-layout align-center justify-center>
+                                <v-flex pr-2 xs1>
+                                    <v-icon color="error" size="40">clear</v-icon>
+                                </v-flex>
+                                <v-flex pl-4>
+                                    Your selected timeslot is not avaliable, Please choice other timeslot or room.
+                                </v-flex>
+                            </v-layout>
+                        </v-card-text>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="primary" flat @click="dialogTsna=false">
+                                OK
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+                <v-dialog v-model="dialogSuccess" max-width="500">
+                    <v-card width="500">
+                        <v-card-title class="grey lighten-3">
+                            Book Successfully
+                            <v-spacer></v-spacer>
+                            <v-btn icon small @click="dialogSuccess=false">
+                                <v-icon size="18">
+                                    clear
+                                </v-icon>
+                            </v-btn>
+                        </v-card-title>
+
+                        <v-card-text>
+                            <v-layout align-center justify-start>
+                                <v-flex pr-2 xs1>
+                                    <v-icon color="success" size="40">check</v-icon>
+                                </v-flex>
+                                <v-flex pl-4>
+                                    Book Successfuly, Please arrive on time.
+                                </v-flex>
+                            </v-layout>
+                        </v-card-text>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="primary" flat @click="dialogSuccess=false">
+                                OK
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+                <v-dialog v-model="dialogConfirm" max-width="500">
+                    <v-card width="500">
+                        <v-card-title class="grey lighten-3">
+                            Confirm Book
+                            <v-spacer></v-spacer>
+                            <v-btn icon small @click="dialogConfirm=false">
+                                <v-icon size="18">
+                                    clear
+                                </v-icon>
+                            </v-btn>
+                        </v-card-title>
+
+                        <v-card-text>
+                            Please confirm your booking information:
+                            <div class="pt-2">
+                                <v-text-field v-model="bookInfo.room" label="Room" prepend-icon="meeting_room" readonly></v-text-field>
+                                <v-text-field v-model="bookInfo.date" label="Date" required prepend-icon="today" readonly></v-text-field>
+                                <v-text-field v-model="bookInfo.time" label="Time" required prepend-icon="access_time" readonly></v-text-field>
+                            </div>
+                        </v-card-text>
+
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn flat @click="dialogConfirm=false">
+                                Cancel
+                            </v-btn>
+                            <v-btn color="primary" flat @click="confirmBook">
+                                Confirm
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
+            </v-content>
+        </v-app>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js "></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@1.3.9/dist/vuetify.js "></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: () => ({
+            bookInfo: {
+                room: "",
+                date: "",
+                time: "",
+            },
+            room: "Project Room 1",
+            date: "",
+            time: "",
+            duration: 1,
+            remark: "",
+            dialogConfirm: false,
+            dialogRemove: false,
+            dialogSuccess: false,
+            dialogTsna: false,
+            valid: true,
+            bookRemove: {},
+            user: {},
+            reserveLimit: {
+                "Teaching Staff": 10,
+                "Non-teaching staff": 10,
+                "Student": 5,
+                "Alumni": 3
+            },
+            reserveList: [],
+            itm: [],
+            header: {},
+            allowTime: ["10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00", "20:00 - 21:00"],
+            rooms: ["Project Room 1", "Project Room 2", "Project Room 3", "Project Room 4", "Project Room 5", "Project Room 6", "Project Room 7"],
+            bookStatus: {},
+            requiredRules: [
+                v => !!v || 'Please select an avaliable time'
+            ],
+        }),
+        created() {
+            let user = localStorage.getItem("loggedInAs");
+            if (!user) {
+                window.location.href = "./index.html";
+                return;
+            }
+            this.user = JSON.parse(user);
+
+            this.reserveList = JSON.parse(localStorage.getItem(this.reserveListName))
+            if (!this.reserveList) {
+                this.reserveList = [];
+            }
+
+            this.bookStatus = this.getBookStatus();
+            this.init();
+            this.setBookStatus();
+
+        },
+        methods: {
+            init() {
+                this.header = {}
+                this.itm = []
+                for (i in this.allowTime) {
+                    this.itm.push({
+                        time: this.allowTime[i]
+                    })
+                }
+                this.header = this.allowDates;
+                this.fillTable();
+            },
+            confirmBook() {
+                let rm = this.room;
+                this.$refs.bookForm.reset();
+                if (this.bookInfo.rs == 2) {
+                    this.book(this.bookInfo.room, this.bookInfo.date, this.bookInfo.rst[0])
+                    this.book(this.bookInfo.room, this.bookInfo.date, this.bookInfo.rst[1])
+                } else {
+                    this.book(this.bookInfo.room, this.bookInfo.date, this.bookInfo.rst);
+                }
+
+                setTimeout(() => {
+                    this.bookInfo = {};
+
+                    this.room = rm;
+                    this.date = "";
+                    this.time = "";
+                    this.duration = 1;
+                    this.remark = "";
+
+                    this.dialogConfirm = false;
+                    this.dialogSuccess = true;
+                }, 100)
+
+            },
+            bookRoom() {
+                if (!this.$refs.bookForm.validate()) {
+                    return;
+                }
+                let avaliable = false;
+                let err = "";
+                if (this.duration == 2) {
+                    let tidx = this.allowTime.indexOf(this.time);
+                    let t = this.allowTime[tidx + 1]
+                    if (t) {
+                        avaliable = (this.checkAvailable(this.room, this.date, this.time) &&
+                            this.checkAvailable(this.room, this.date, t))
+                        if (avaliable) {
+                            this.bookInfo.room = this.room;
+                            this.bookInfo.date = this.date;
+                            this.bookInfo.time = this.time.split(" - ")[0] + " - " + t.split(" - ")[1];
+                            this.bookInfo.rs = 2;
+                            this.bookInfo.rst = [this.time, t]
+                            this.dialogConfirm = true;
+                        } else {
+                            this.notAvaliable();
+                        }
+                    } else {
+                        this.notAvaliable();
+                    }
+                } else {
+                    avaliable = (this.checkAvailable(this.room, this.date, this.time))
+                    if (avaliable) {
+                        this.bookInfo.room = this.room;
+                        this.bookInfo.date = this.date;
+                        this.bookInfo.time = this.time;
+                        this.bookInfo.rs = 1;
+                        this.bookInfo.rst = this.time
+                        this.dialogConfirm = true;
+                    } else {
+                        this.notAvaliable();
+                    }
+                }
+            },
+            notAvaliable() {
+                this.dialogTsna = true;
+            },
+            book(room, date, time) {
+                let rm = this.bookStatus[room]
+                if (!rm) {
+                    this.bookStatus[room] = {}
+                }
+                let dt = this.bookStatus[room][date]
+                if (!dt) {
+                    this.bookStatus[room][date] = [];
+                }
+                this.bookStatus[room][date].push(time)
+                this.setBookStatus();
+            },
+            fillTable() {
+                for (j in this.allowTime) {
+                    for (i = 0; i < 7; i++) {
+                        this.itm[j][`d${i}`] = {
+                            date: this.allowDates[i],
+                            time: this.allowTime[j],
+                            available: this.checkAvailable(this.room, this.allowDates[i], this.allowTime[j])
+                        }
+                    }
+                }
+            },
+            checkAvailable(room, date, time) {
+                let rbs = this.bookStatus[room];
+                if (rbs) {
+                    let bsd = rbs[date];
+                    if (bsd) {
+                        return bsd.indexOf(time) == -1;
+                    }
+                }
+                return true;
+            },
+            selectDate(date, time) {
+                this.date = date;
+                this.time = time;
+                setTimeout(() => {
+                    this.$refs.bookForm.validate()
+                }, 100)
+            },
+            getBookStatus() {
+                let bs = localStorage.getItem("bookStatus")
+                if (!bs) {
+                    this.bookStatus = {}
+                    return {};
+                } else {
+                    bs = JSON.parse(bs);
+                    return bs;
+                }
+            },
+            setBookStatus() {
+                if (!this.bookStatus) {
+                    this.bookStatus = {};
+                }
+                localStorage.setItem("bookStatus", JSON.stringify(this.bookStatus))
+                this.init();
+            },
+            href(link) {
+                location.href = link;
+            },
+            removeReserve(book) {
+                this.bookRemove = book;
+                this.dialogRemove = true;
+            },
+            removeConfirm() {
+                this.dialogRemove = false;
+                this.reserveList.splice(this.reserveList.findIndex(b => b.id == this.bookRemove.id), 1)
+            },
+            logout() {
+                window.location.href = `./login.html`
+            },
+            setReserveList() {
+                localStorage.setItem(this.reserveListName, JSON.stringify(this.reserveList))
+            },
+            reserveBook(book) {
+                if (this.reserveList.findIndex(b => b.id == book.id) >= 0) {
+                    this.bookReservePage[book.id] = 3;
+                    return;
+                }
+                if (this.reserveList.length >= this.maxAllowReserve) {
+                    this.bookReservePage[book.id] = 2;
+                    return;
+                }
+                book = Object.assign({}, book);
+                book.pickupTime = moment().add(3, "day").format("YYYY-MM-DD")
+                this.reserveList.push(book);
+                this.bookReservePage[book.id] = 1;
+            }
+        },
+        watch: {
+            room() {
+                this.init();
+            },
+            bookStatus: {
+                handler() {
+                    console.log("ch")
+                    this.setBookStatus();
+                },
+                deep: true
+            },
+            reserveList() {
+                this.setReserveList();
+            },
+        },
+        computed: {
+            allowDatesHeader() {
+                let ad = this.allowDates;
+                let dates = [{
+                    text: "",
+                    value: "time",
+                    sortable: false
+                }];
+                for (i in ad) {
+                    dates.push({
+                        text: ad[i],
+                        value: `d${i}`,
+                        sortable: false
+                    })
+                }
+                return dates;
+            },
+            allowDates() {
+                let d = moment();
+                let dates = [];
+                for (let i = 0; i < 7; i++) {
+                    dates.push(d.format("MM/DD"))
+                    d.add(1, "day")
+                }
+                return dates;
+            },
+            maxAllowReserve() {
+                return this.reserveLimit[this.user.role]
+            },
+            reserveListName() {
+                return "reserveList_" + this.user.username;
+            },
+        }
+    })
+</script>
+
+</html>
