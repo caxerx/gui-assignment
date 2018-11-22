@@ -41,11 +41,6 @@
                                                         </v-expansion-panel-content>
                                                     </v-expansion-panel>
                                                 </v-flex>
-                                                <v-card flat color="info lighten-2" class="white--text mt-3 mb-3">
-                                                    <v-card-text class="text-xs-center">
-                                                        Demo Account: <br/> Username: ts <br/> Password: ts1
-                                                    </v-card-text>
-                                                </v-card>
                                                 <v-layout class="align-center justify-center mt-3">
                                                     <v-btn depressed color="primary" type="submit" @click="login">Login</v-btn>
                                                 </v-layout>
@@ -66,7 +61,7 @@
                                         <v-container class="px-5" leave-absolute hide-on-leave>
                                             <p class="headline text-xs-center primary--text">Reset Password</p>
                                             <v-form @submit.prevent="request" ref="resetForm" v-model="valid" lazy-validation>
-                                                <v-text-field prepend-icon="email" name="login" label="Email" type="text" v-model="loginInfo.userId" required :rules="emailRules" validate-on-blur></v-text-field>
+                                                <v-text-field prepend-icon="email" name="login" label="Email" type="text" v-model="loginInfo.userId" required :rules="emailRules"></v-text-field>
                                                 <v-layout class="align-center justify-center mt-3">
                                                     <v-btn depressed color="primary" type="submit">Request Password Reset
                                                     </v-btn>

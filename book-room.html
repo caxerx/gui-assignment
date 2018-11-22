@@ -7,16 +7,18 @@
     <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Room Booking - Library System</title>
+    <title>Room Booking-Library System</title>
 </head>
 
 <body>
     <div id="app">
         <v-app id="inspire">
             <v-toolbar color="primary" app clipped-left dark>
-                <v-toolbar-title>
-                    Library System
-                </v-toolbar-title>
+                <a class="white--text" style="text-decoration: none;" href="search.html">
+                    <v-toolbar-title>
+                        Library System
+                    </v-toolbar-title>
+                </a>
                 <v-spacer></v-spacer>
                 <v-menu attach offset-y>
                     <v-tooltip left slot="activator">
@@ -55,12 +57,15 @@
                     </v-card>
                 </v-menu>
 
-                <v-menu :close-on-content-click="false" max-height="400" attach nudge-bottom="60" nudge-left="320">
+                <v-menu :close-on-content-click="false" max-height="400" attach nudge-bottom="60" nudge-left="320" v-model="resList" class="pr-4">
                     <v-tooltip left slot="activator">
                         <v-btn icon slot="activator">
-                            <v-icon>
-                                archive
-                            </v-icon>
+                            <v-badge color="red">
+                                <v-icon>
+                                    archive
+                                </v-icon>
+                                <span slot="badge" v-if="reserveList.length >0">{{reserveList.length}}</span>
+                            </v-badge>
                         </v-btn>
                         <span>Reserve List</span>
                     </v-tooltip>
@@ -68,7 +73,7 @@
                         <v-toolbar fixed>
                             Reserve List ({{reserveList.length}}/{{maxAllowReserve}})
                             <v-spacer></v-spacer>
-                            <v-icon size="14" @click="">clear</v-icon>
+                            <v-icon size="14" @click="resList=false">clear</v-icon>
                         </v-toolbar>
                         <div style="margin-top:64px; height: 336px; overflow: scroll; overflow-x:hidden;">
                             <v-list three-line>
@@ -389,6 +394,7 @@
                 date: "",
                 time: "",
             },
+            resList: false,
             room: "Project Room 1",
             date: "",
             time: "",
@@ -410,7 +416,7 @@
             reserveList: [],
             itm: [],
             header: {},
-            allowTime: ["10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00", "20:00 - 21:00"],
+            allowTime: ["10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00", "18:00-19:00", "19:00-20:00", "20:00-21:00"],
             rooms: ["Project Room 1", "Project Room 2", "Project Room 3", "Project Room 4", "Project Room 5", "Project Room 6", "Project Room 7"],
             bookStatus: {},
             requiredRules: [
@@ -486,7 +492,7 @@
                         if (avaliable) {
                             this.bookInfo.room = this.room;
                             this.bookInfo.date = this.date;
-                            this.bookInfo.time = this.time.split(" - ")[0] + " - " + t.split(" - ")[1];
+                            this.bookInfo.time = this.time.split("-")[0] + "-" + t.split("-")[1];
                             this.bookInfo.rs = 2;
                             this.bookInfo.rst = [this.time, t]
                             this.dialogConfirm = true;

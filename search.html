@@ -53,12 +53,17 @@
                         </v-card>
                     </v-menu>
 
-                    <v-menu :close-on-content-click="false" max-height="400" attach nudge-bottom="60" nudge-left="320">
+
+
+                    <v-menu :close-on-content-click="false" max-height="400" attach nudge-bottom="60" nudge-left="320" v-model="resList" class="pr-4">
                         <v-tooltip left slot="activator">
                             <v-btn icon slot="activator">
-                                <v-icon>
-                                    archive
-                                </v-icon>
+                                <v-badge color="red">
+                                    <v-icon>
+                                        archive
+                                    </v-icon>
+                                    <span slot="badge" v-if="reserveList.length >0">{{reserveList.length}}</span>
+                                </v-badge>
                             </v-btn>
                             <span>Reserve List</span>
                         </v-tooltip>
@@ -66,7 +71,7 @@
                             <v-toolbar fixed>
                                 Reserve List ({{reserveList.length}}/{{maxAllowReserve}})
                                 <v-spacer></v-spacer>
-                                <v-icon size="14" @click="">clear</v-icon>
+                                <v-icon size="14" @click="resList=false">clear</v-icon>
                             </v-toolbar>
                             <div style="padding-top:64px; height: 336px; overflow: scroll;">
                                 <v-list three-line>
@@ -231,7 +236,7 @@
             reserveList: [],
             dialogRemove: false,
             bookRemove: {},
-
+            resList: false,
         }),
         created() {
             let user = localStorage.getItem("loggedInAs");
